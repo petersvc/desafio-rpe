@@ -1,0 +1,5 @@
+/api/src/main/java/com/example/desafioRpe/models/Veiculo.java
+/api/src/main/java/com/example/desafioRpe/DesafioRpeApplication.java
+/api/src/main/java/com/example/desafioRpe/models/VeiculoDePasseio.java
+/api/src/main/java/com/example/desafioRpe/models/VeiculoDeCarga.java
+/api/src/main/java/com/example/desafioRpe/util/GeradorPlaca.java

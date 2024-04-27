@@ -1,0 +1,5 @@
+com/example/desafioRpe/DesafioRpeApplication.class
+com/example/desafioRpe/models/VeiculoDeCarga.class
+com/example/desafioRpe/models/Veiculo.class
+com/example/desafioRpe/models/VeiculoDePasseio.class
+com/example/desafioRpe/util/GeradorPlaca.class
