@@ -4,12 +4,13 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("quantidadeDeCarroceria")
+@DiscriminatorValue("carga")
 public class VeiculoDeCarga extends Veiculo {
-    private int capacidade;
+    // Capacitade em toneladas
+    private double capacidade;
     private int quantidadeDeCarroceria;
 
-    public VeiculoDeCarga(String placa, String nome, String marca, int capacidade, int quantidadeDeCarroceria) {
+    public VeiculoDeCarga(String placa, String nome, String marca, double capacidade, int quantidadeDeCarroceria) {
         super(placa, nome, marca);
         this.capacidade = capacidade;
         this.quantidadeDeCarroceria = quantidadeDeCarroceria;
@@ -17,7 +18,7 @@ public class VeiculoDeCarga extends Veiculo {
 
     public VeiculoDeCarga() {}
 
-    public int getCapacidade() {
+    public double getCapacidade() {
         return capacidade;
     }
 
@@ -25,7 +26,7 @@ public class VeiculoDeCarga extends Veiculo {
         return quantidadeDeCarroceria;
     }
 
-    public void setCapacidade(int capacidade) {
+    public void setCapacidade(double capacidade) {
         this.capacidade = capacidade;
     }
 

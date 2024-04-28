@@ -2,12 +2,17 @@ package com.example.desafioRpe.models;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_veiculo", discriminatorType = DiscriminatorType.STRING)
 public abstract class Veiculo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    public UUID id;
+    @Column(unique = true)
     private String placa;
     private String nome;
     private String marca;
@@ -18,6 +23,10 @@ public abstract class Veiculo {
         this.placa = placa;
         this.nome = nome;
         this.marca = marca;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getPlaca() {

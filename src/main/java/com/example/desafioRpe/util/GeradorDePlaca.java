@@ -1,6 +1,6 @@
 package com.example.desafioRpe.util;
 
-public class GeradorPlaca {
+public class GeradorDePlaca {
     public static String gerarPlaca() {
         StringBuilder placa = new StringBuilder();
 

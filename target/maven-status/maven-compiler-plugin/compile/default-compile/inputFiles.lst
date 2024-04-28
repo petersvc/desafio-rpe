@@ -1,5 +1,14 @@
 /api/src/main/java/com/example/desafioRpe/models/Veiculo.java
-/api/src/main/java/com/example/desafioRpe/DesafioRpeApplication.java
+/api/src/main/java/com/example/desafioRpe/dtos/VeiculoDePasseioRecordDto.java
+/api/src/main/java/com/example/desafioRpe/util/GeradorDePlaca.java
+/api/src/main/java/com/example/desafioRpe/controllers/VeiculoDePasseioController.java
+/api/src/main/java/com/example/desafioRpe/services/VeiculoDeCargaService.java
 /api/src/main/java/com/example/desafioRpe/models/VeiculoDePasseio.java
 /api/src/main/java/com/example/desafioRpe/models/VeiculoDeCarga.java
-/api/src/main/java/com/example/desafioRpe/util/GeradorPlaca.java
+/api/src/main/java/com/example/desafioRpe/dtos/VeiculoDeCargaRecordDto.java
+/api/src/main/java/com/example/desafioRpe/repositories/VeiculoDeCargaRepository.java
+/api/src/main/java/com/example/desafioRpe/AppConfig.java
+/api/src/main/java/com/example/desafioRpe/repositories/VeiculoDePasseioRepository.java
+/api/src/main/java/com/example/desafioRpe/services/VeiculoDePasseioService.java
+/api/src/main/java/com/example/desafioRpe/DesafioRpeApplication.java
+/api/src/main/java/com/example/desafioRpe/controllers/VeiculoDeCargaController.java
