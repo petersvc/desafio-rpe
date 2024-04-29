@@ -3,6 +3,7 @@ package com.example.desafioRpe.controllers;
 import com.example.desafioRpe.dtos.VeiculoDeCargaRecordDto;
 import com.example.desafioRpe.models.VeiculoDeCarga;
 import com.example.desafioRpe.services.VeiculoDeCargaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/veiculos-de-carga")
+@Tag(name = "Veículo de carga", description = "API para gerenciamento de veículos de carga")
 public class VeiculoDeCargaController {
 
     private final VeiculoDeCargaService veiculoDeCargaService;
@@ -39,7 +41,7 @@ public class VeiculoDeCargaController {
     public ResponseEntity<Object> findById(@PathVariable(value="id") UUID id) {
         Optional<VeiculoDeCarga> veiculoDeCarga = Optional.ofNullable(veiculoDeCargaService.findById(id));
         if (veiculoDeCarga.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo de passeio não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo não encontrado.");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(veiculoDeCarga.get());
@@ -49,7 +51,7 @@ public class VeiculoDeCargaController {
     public ResponseEntity<Object> findByPlaca(@PathVariable(value="placa") String placa) {
         Optional<VeiculoDeCarga> veiculoDeCarga = Optional.ofNullable(veiculoDeCargaService.findByPlaca(placa));
         if (veiculoDeCarga.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo de passeio não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo não encontrado.");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(veiculoDeCarga.get());
@@ -59,7 +61,7 @@ public class VeiculoDeCargaController {
     public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody VeiculoDeCarga veiculoDeCarga) {
         Optional<VeiculoDeCarga> veiculoDeCargaOptional = Optional.ofNullable(veiculoDeCargaService.findById(id));
         if (veiculoDeCargaOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo de passeio not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veiculo não encontrado.");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(veiculoDeCargaService.update(veiculoDeCarga));
@@ -69,7 +71,7 @@ public class VeiculoDeCargaController {
     public ResponseEntity<Object> delete(@PathVariable UUID id) {
         Optional<VeiculoDeCarga> veiculoDeCarga = Optional.ofNullable(veiculoDeCargaService.findById(id));
         if (veiculoDeCarga.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veículo de passeio não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Veículo não encontrado.");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(veiculoDeCargaService.delete(id));
