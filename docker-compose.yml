@@ -23,23 +23,10 @@ services:
         WORKDIR /api
         COPY . .
         RUN apk add maven
-        CMD ["mvn", "spring-boot:run", "-DDATABASE_URL=jdbc:postgresql://postgres:5432/rpe", "-DDATABASE_USERNAME=postgres", "-DDATABASE_PASSWORD=postgres"]
+        CMD ["DATABASE_URL=jdbc:postgresql://localhost:5432/rpe", "\", "DATABASE_USERNAME=postgres", "\", "DATABASE_PASSWORD=postgres", "\", "mvn", "spring-boot:run"]
     ports:
       - "8080:8080"
     volumes:
       - .:/api
     depends_on:
       - db
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin@mail.com
-      PGADMIN_DEFAULT_PASSWORD: pgadmin
-    depends_on:
-      - db
-    ports:
-      - "54621:80"
-      - "443:443"
