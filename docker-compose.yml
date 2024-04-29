@@ -18,8 +18,12 @@ services:
     image: desafio-rpe
     container_name: desafio-rpe
     build:
-      context: .
-      dockerfile: Dockerfile
+      dockerfile_inline: |
+        FROM eclipse-temurin:21-alpine
+        WORKDIR /api
+        COPY . .
+        RUN apk add maven
+        CMD ["mvn", "spring-boot:run", "-DDATABASE_URL=jdbc:postgresql://postgres:5432/rpe", "-DDATABASE_USERNAME=postgres", "-DDATABASE_PASSWORD=postgres"]
     ports:
       - "8080:8080"
     volumes:

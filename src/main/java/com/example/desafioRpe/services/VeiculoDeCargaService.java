@@ -28,11 +28,12 @@ public class VeiculoDeCargaService {
         return VeiculoDeCargaRepository.findAll();
     }
 
-    // Método para buscar um veículo de passeio pela placa
+    // Método para buscar um veículo de passeio pelo id
     public VeiculoDeCarga findById(UUID id) {
         return VeiculoDeCargaRepository.findById(id).orElse(null);
     }
 
+    // Método para buscar um veículo de passeio pela placa
     public VeiculoDeCarga findByPlaca(String placa) {
         return VeiculoDeCargaRepository.findByPlaca(placa);
     }
