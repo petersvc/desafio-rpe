@@ -1,14 +1,17 @@
-FROM eclipse-temurin:21-alpine as build
+FROM maven:3.9-eclipse-temurin-21-alpine as build
+
+WORKDIR /app
 
 COPY . .
 
-RUN apk add maven
-RUN mvn clean install
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-alpine
 
+WORKDIR /app
+
 EXPOSE 8080
 
-COPY --from=build /target/desafioRpe-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build ./app/target/desafioRpe-0.0.1-SNAPSHOT.jar ./app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
