@@ -15,8 +15,8 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/api/veiculos-de-passeio")
-@Tag(name = "Veículo de passeio", description = "API para gerenciamento de veículos de passeio")
+@RequestMapping("/api/veiculos-de-carga")
+@Tag(name = "Veículo de carga", description = "API para gerenciamento de veículos de carga")
 public class VeiculoDeCargaController {
 
     private final VeiculoDeCargaService veiculoDeCargaService;
