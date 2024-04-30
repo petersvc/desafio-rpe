@@ -1,4 +1,4 @@
-package com.example.desafioRpe.models;
+package com.example.desafioRpe.domain.entities;
 
 import jakarta.persistence.*;
 

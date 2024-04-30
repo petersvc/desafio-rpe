@@ -1,7 +1,9 @@
 package com.example.desafioRpe.services;
 
-import com.example.desafioRpe.dtos.VeiculoDeCargaRecordDto;
-import com.example.desafioRpe.models.VeiculoDeCarga;
+import com.example.desafioRpe.domain.dtos.VeiculoDeCargaDto;
+import com.example.desafioRpe.domain.entities.VeiculoDeCarga;
+import com.example.desafioRpe.domain.exceptions.PlacaJaCadastradaException;
+import com.example.desafioRpe.domain.exceptions.VeiculoNaoEncontradoException;
 import com.example.desafioRpe.repositories.VeiculoDeCargaRepository;
 import com.example.desafioRpe.util.GeradorDePlaca;
 import org.springframework.beans.BeanUtils;
@@ -9,60 +11,72 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class VeiculoDeCargaService {
 
-    private final VeiculoDeCargaRepository VeiculoDeCargaRepository;
+    private final VeiculoDeCargaRepository veiculoDeCargaRepository;
 
     @Autowired
     public VeiculoDeCargaService(VeiculoDeCargaRepository veiculoDeCargaRepository) {
-        this.VeiculoDeCargaRepository = veiculoDeCargaRepository;
+        this.veiculoDeCargaRepository = veiculoDeCargaRepository;
     }
 
     // Métodos de CRUD
 
-    // Método para listar todos os veículos de passeio
-    public List<VeiculoDeCarga> findAll() {
-        return VeiculoDeCargaRepository.findAll();
-    }
-
-    // Método para buscar um veículo de passeio pelo id
-    public VeiculoDeCarga findById(UUID id) {
-        return VeiculoDeCargaRepository.findById(id).orElse(null);
-    }
-
-    // Método para buscar um veículo de passeio pela placa
-    public VeiculoDeCarga findByPlaca(String placa) {
-        return VeiculoDeCargaRepository.findByPlaca(placa);
-    }
-
     // Método para salvar um veículo de passeio
-    public VeiculoDeCarga save(VeiculoDeCargaRecordDto veiculoDeCargaRecordDto) {
-        var veiculoDeCarga = new VeiculoDeCarga();
+    public VeiculoDeCarga save(VeiculoDeCargaDto veiculoDeCargaDto) {
+        // Verificar se já existe um veículo com a mesma placa
+        String placa = veiculoDeCargaDto.placa();
+        Optional<VeiculoDeCarga> veiculoExistente = veiculoDeCargaRepository.findByPlaca(placa);
 
-        BeanUtils.copyProperties(veiculoDeCargaRecordDto, veiculoDeCarga);
+        if (veiculoExistente.isPresent()) {
+            throw new PlacaJaCadastradaException("Já existe um veículo com a placa fornecida: " + placa);
+        }
+
+        var veiculoDeCarga = new VeiculoDeCarga();
+        BeanUtils.copyProperties(veiculoDeCargaDto, veiculoDeCarga);
 
         if (veiculoDeCarga.getPlaca().isEmpty()) {
             veiculoDeCarga.setPlaca(GeradorDePlaca.gerarPlaca());
         }
 
-        return VeiculoDeCargaRepository.save(veiculoDeCarga);
+        return veiculoDeCargaRepository.save(veiculoDeCarga);
+    }
+
+    // Método para listar todos os veículos de passeio
+    public List<VeiculoDeCarga> findAll() {
+        return veiculoDeCargaRepository.findAll();
+    }
+
+    // Método para buscar um veículo de passeio pela placa
+    public VeiculoDeCarga findById(UUID id) {
+        Optional<VeiculoDeCarga> veiculoDeCarga = veiculoDeCargaRepository.findById(id);
+        return veiculoDeCarga.orElseThrow(VeiculoNaoEncontradoException::new);
+    }
+
+    public VeiculoDeCarga findByPlaca(String placa) {
+        Optional<VeiculoDeCarga> veiculoDeCarga = veiculoDeCargaRepository.findByPlaca(placa);
+        return veiculoDeCarga.orElseThrow(VeiculoNaoEncontradoException::new);
     }
 
     // Método para atualizar um veículo de passeio
-    public VeiculoDeCarga update(VeiculoDeCarga veiculoDeCarga) {
-        return VeiculoDeCargaRepository.save(veiculoDeCarga);
+    public VeiculoDeCarga update(UUID id, VeiculoDeCargaDto veiculoDeCargaDto) {
+        VeiculoDeCarga veiculoDeCarga = veiculoDeCargaRepository
+                .findById(id)
+                .orElseThrow(VeiculoNaoEncontradoException::new);
+
+        BeanUtils.copyProperties(veiculoDeCargaDto, veiculoDeCarga);
+
+        return veiculoDeCargaRepository.save(veiculoDeCarga);
     }
 
     // Método para deletar um veículo de passeio
     public String delete(UUID id) {
-        try {
-            VeiculoDeCargaRepository.deleteById(id);
-            return "Veículo apagado com sucesso";
-        } catch (Exception e) {
-            return "Falha ao excluir veículo: " + e.getMessage();
-        }
+        veiculoDeCargaRepository.findById(id).orElseThrow(VeiculoNaoEncontradoException::new);
+        veiculoDeCargaRepository.deleteById(id);
+        return "Veículo deletado com sucesso!";
     }
 }
