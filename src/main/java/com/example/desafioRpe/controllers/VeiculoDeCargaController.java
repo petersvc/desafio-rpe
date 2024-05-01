@@ -17,10 +17,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/veiculos-de-carga")
 @Tag(name = "Veículo de carga", description = "API para gerenciamento de veículos de carga")
-public class VeiculoDeCargaController {
+public class VeiculoDeCargaController implements SecuredRestController {
 
     private final VeiculoDeCargaService veiculoDeCargaService;
-    
+
     @Autowired
     public VeiculoDeCargaController(VeiculoDeCargaService veiculoDeCargaService) {
         this.veiculoDeCargaService = veiculoDeCargaService;

@@ -17,7 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/veiculos-de-passeio")
 @Tag(name = "Veículo de passeio", description = "API para gerenciamento de veículos de passeio")
-public class VeiculoDePasseioController {
+public class VeiculoDePasseioController implements SecuredRestController {
 
     private final VeiculoDePasseioService veiculoDePasseioService;
 

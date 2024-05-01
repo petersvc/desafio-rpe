@@ -42,7 +42,7 @@ A estrutura do projeto segue os padrões do Spring Boot:
 - **test**: Testes automatizados.
 
 ## Utilizando a API via browser
-**É possível utilizar a api, ao menos parcialmente, via swagger-ui, acessível em: **[API](https://desafio-rpe.onrender.com/swagger-ui/index.html)**.**
+**É possível utilizar a api, via swagger-ui, acessível em: **[API](https://desafio-rpe.onrender.com/swagger-ui/index.html)**.**
 Verifique a seção `Como usar a API` para mais informações.
 
 ## Configuração do Ambiente de Execução
@@ -90,7 +90,7 @@ bastanto apenas executar o comando `mvn spring-boot:run` ou após
 executar o comando `mvn clean package -DskipTests`, executar `java -jar ./target/*.jar`.
 
 ## Como usar a API
-É possível utilizar a API através de um programa como o Postman ou Insomnia.
+É possível utilizar a API através do swagger ou de um cliente REST como o Postman ou Insomnia.
 
 Os endpoints disponíveis estão listados na documentação da API, acessível em `http://localhost:54321/swagger-ui/index.html`, `http://localhost:8080/swagger-ui/index.html` ou ainda
 `https://desafio-rpe.onrender.com/swagger-ui/index.html`. 

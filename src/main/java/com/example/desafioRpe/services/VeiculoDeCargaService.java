@@ -26,7 +26,7 @@ public class VeiculoDeCargaService {
 
     // Métodos de CRUD
 
-    // Método para salvar um veículo de passeio
+    // Método para salvar um veículo de carga
     public VeiculoDeCarga save(VeiculoDeCargaDto veiculoDeCargaDto) {
         // Verificar se já existe um veículo com a mesma placa
         String placa = veiculoDeCargaDto.placa();
@@ -46,23 +46,24 @@ public class VeiculoDeCargaService {
         return veiculoDeCargaRepository.save(veiculoDeCarga);
     }
 
-    // Método para listar todos os veículos de passeio
+    // Método para listar todos os veículos de carga
     public List<VeiculoDeCarga> findAll() {
         return veiculoDeCargaRepository.findAll();
     }
 
-    // Método para buscar um veículo de passeio pela placa
+    // Método para buscar um veículo de carga pelo id
     public VeiculoDeCarga findById(UUID id) {
         Optional<VeiculoDeCarga> veiculoDeCarga = veiculoDeCargaRepository.findById(id);
         return veiculoDeCarga.orElseThrow(VeiculoNaoEncontradoException::new);
     }
 
+    // Método para buscar um veículo de carga pela placa
     public VeiculoDeCarga findByPlaca(String placa) {
         Optional<VeiculoDeCarga> veiculoDeCarga = veiculoDeCargaRepository.findByPlaca(placa);
         return veiculoDeCarga.orElseThrow(VeiculoNaoEncontradoException::new);
     }
 
-    // Método para atualizar um veículo de passeio
+    // Método para atualizar um veículo de carga
     public VeiculoDeCarga update(UUID id, VeiculoDeCargaDto veiculoDeCargaDto) {
         VeiculoDeCarga veiculoDeCarga = veiculoDeCargaRepository
                 .findById(id)
@@ -73,7 +74,7 @@ public class VeiculoDeCargaService {
         return veiculoDeCargaRepository.save(veiculoDeCarga);
     }
 
-    // Método para deletar um veículo de passeio
+    // Método para deletar um veículo de carga
     public String delete(UUID id) {
         veiculoDeCargaRepository.findById(id).orElseThrow(VeiculoNaoEncontradoException::new);
         veiculoDeCargaRepository.deleteById(id);

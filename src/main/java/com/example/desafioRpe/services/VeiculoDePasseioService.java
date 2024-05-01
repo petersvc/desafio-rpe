@@ -8,7 +8,6 @@ import com.example.desafioRpe.repositories.VeiculoDePasseioRepository;
 import com.example.desafioRpe.util.GeradorDePlaca;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Component
 public class VeiculoDePasseioService {
 
     private final VeiculoDePasseioRepository veiculoDePasseioRepository;
@@ -47,18 +45,19 @@ public class VeiculoDePasseioService {
 
         return veiculoDePasseioRepository.save(veiculoDePasseio);
     }
-    
+
     // Método para listar todos os veículos de passeio
     public List<VeiculoDePasseio> findAll() {
         return veiculoDePasseioRepository.findAll();
     }
 
-    // Método para buscar um veículo de passeio pela placa
+    // Método para buscar um veículo de passeio pelo id
     public VeiculoDePasseio findById(UUID id) {
         Optional<VeiculoDePasseio> veiculoDePasseio = veiculoDePasseioRepository.findById(id);
         return veiculoDePasseio.orElseThrow(VeiculoNaoEncontradoException::new);
     }
 
+    // Método para buscar um veículo de passeio pela placa
     public VeiculoDePasseio findByPlaca(String placa) {
         Optional<VeiculoDePasseio> veiculoDePasseio = veiculoDePasseioRepository.findByPlaca(placa);
         return veiculoDePasseio.orElseThrow(VeiculoNaoEncontradoException::new);
