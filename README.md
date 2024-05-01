@@ -100,14 +100,24 @@ Os endpoints disponíveis estão listados na documentação da API, acessível e
 É preciso levar em consideração que o spring security está habilitado, então é necessário autenticar-se para acessar os endpoints.
 
 Apenas o endereço do swagger-ui está disponível sem autenticação.
-Para autenticar-se e obter o token JWT, é necessário enviar uma requisição POST para o endpoint `/auth` com o seguinte corpo, por exemplo:
+Para autenticar-se e obter o token JWT, é necessário enviar uma requisição POST para o endpoint `/auth/registrar` com o seguinte corpo, por exemplo:
 ```json
 {
-  "login": "peter2",
+  "login": "peter",
   "senha": "12345",
-  "perfil": "USUARIO"
+  "perfil": "ADMIN"
 }
 ```
+Isso irá criar um usuário com login `peter`, senha `12345` e perfil `ADMIN`.
+
+Após isso é possível autenticar-se enviando uma requisição POST para o endpoint `/auth/login` com o seguinte corpo:
+```json
+{
+  "login": "peter",
+  "senha": "12345"
+}
+```
+
 Existem dois perfis disponíveis: `ADMIN` e `USUARIO`.
 
 `ADMIN` tem permissão para acessar todos os endpoints. 
