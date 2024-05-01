@@ -20,7 +20,7 @@ import java.util.UUID;
 public class VeiculoDeCargaController {
 
     private final VeiculoDeCargaService veiculoDeCargaService;
-
+    
     @Autowired
     public VeiculoDeCargaController(VeiculoDeCargaService veiculoDeCargaService) {
         this.veiculoDeCargaService = veiculoDeCargaService;
