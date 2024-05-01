@@ -1,4 +1,4 @@
-package com.example.desafioRpe.infra;
+package com.example.desafioRpe.infra.handlers;
 
 import com.example.desafioRpe.domain.exceptions.PlacaJaCadastradaException;
 import com.example.desafioRpe.domain.exceptions.VeiculoNaoEncontradoException;
